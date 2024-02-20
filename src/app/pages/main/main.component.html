@@ -1,0 +1,175 @@
+<mat-toolbar class="d-flex justify-content-between align-items-center">
+  <span
+    class="fs-3 text-warning font"
+    (click)="reloadPage()"
+    style="cursor: pointer"
+    >MoviesDic</span
+  >
+  <div>
+    <mat-form-field
+      appearance="outline"
+      class="mt-4 dense-2"
+      style="width: 150px"
+    >
+      <mat-select [(value)]="selectedOption">
+        <mat-option value="name">By name</mat-option>
+        <mat-option value="id">By IMDb ID</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="dense-2">
+      <input
+        matInput
+        placeholder="Search"
+        type="text"
+        [(ngModel)]="search"
+        (keydown.enter)="toSearch()"
+      />
+      <mat-icon matSuffix (click)="toSearch()" style="cursor: pointer"
+        >search</mat-icon
+      >
+    </mat-form-field>
+  </div>
+</mat-toolbar>
+
+<div class="container">
+  <div *ngIf="isSearch; else top10MoviesList">
+    <!-- Search by name -->
+    <div *ngIf="moviesSearch" class="my-5">
+      <div class="row row-cols-2 row-cols-lg-5 g-5 g-lg-5">
+        <div class="col" *ngFor="let item of moviesSearch">
+          <div style="background-color: rgb(33, 33, 33)">
+            <a routerLink="detail" [queryParams]="{ imdbID: item.imdbID }"
+              ><img
+                src="{{ item.Poster }}"
+                alt=""
+                style="
+                  width: 100%;
+                  height: 21rem;
+                  object-fit: cover;
+                  object-position: center;
+                "
+            /></a>
+            <div class="p-2">
+              <h2 class="text-white fs-5" style="height: 76px">
+                {{ item.Title }} ({{ item.Year }})
+              </h2>
+              <div class="mb-2">
+                <button
+                  mat-raised-button
+                  style="width: 100%; color: rgb(66, 157, 255)"
+                >
+                  <mat-icon aria-hidden="false" fontIcon="add"></mat-icon
+                  >Watchlist
+                </button>
+              </div>
+              <button mat-button style="width: 100%">
+                <mat-icon aria-hidden="false" fontIcon="play_arrow"></mat-icon
+                >Trailer
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Search by ID -->
+    <div *ngIf="movieID" class="my-5">
+      <div class="row row-cols-2 row-cols-lg-5 g-5 g-lg-5">
+        <div class="col" *ngFor="let item of movieID">
+          <div style="background-color: rgb(33, 33, 33)">
+            <a routerLink="detail" [queryParams]="{ imdbID: item.imdbID }"
+              ><img
+                src="{{ item.Poster }}"
+                alt=""
+                style="
+                  width: 100%;
+                  height: 21rem;
+                  object-fit: cover;
+                  object-position: center;
+                "
+            /></a>
+            <div class="p-2">
+              <h2 class="text-white fs-5" style="height: 76px">
+                {{ item.Title }} ({{ item.Year }})
+              </h2>
+              <div class="mb-2">
+                <button
+                  mat-raised-button
+                  style="width: 100%; color: rgb(66, 157, 255)"
+                >
+                  <mat-icon aria-hidden="false" fontIcon="add"></mat-icon
+                  >Watchlist
+                </button>
+              </div>
+              <button mat-button style="width: 100%">
+                <mat-icon aria-hidden="false" fontIcon="play_arrow"></mat-icon
+                >Trailer
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Not found -->
+    <div *ngIf="notFound">
+      <h1 class="text-white text-center">Not Found</h1>
+    </div>
+  </div>
+
+  <ng-template #top10MoviesList>
+    <!-- Top10Movies -->
+    <div>
+      <div class="my-4 p-2 border-start border-warning">
+        <span class="text-white"> Top 10 movies recommend </span>
+      </div>
+      <div class="row row-cols-2 row-cols-lg-5 g-5 g-lg-5">
+        <div class="col" *ngFor="let item of top10Movies">
+          <div style="background-color: rgb(33, 33, 33)">
+            <a routerLink="detail" [queryParams]="{ imdbID: item.imdbID }"
+              ><img
+                src="{{ item.Poster }}"
+                alt=""
+                style="
+                  width: 100%;
+                  height: 21rem;
+                  object-fit: cover;
+                  object-position: center;
+                "
+            /></a>
+            <div class="p-2">
+              <h2 class="text-white fs-5" style="height: 76px">
+                {{ item.Title }} ({{ item.Year }})
+              </h2>
+              <div class="mb-2">
+                <button
+                  mat-raised-button
+                  style="width: 100%; color: rgb(66, 157, 255)"
+                >
+                  <mat-icon aria-hidden="false" fontIcon="add"></mat-icon
+                  >Watchlist
+                </button>
+              </div>
+              <button mat-button style="width: 100%">
+                <mat-icon aria-hidden="false" fontIcon="play_arrow"></mat-icon
+                >Trailer
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br />
+    </div>
+  </ng-template>
+
+  <!-- Paginator -->
+  <mat-paginator
+    [hidden]="hiddenPaginator"
+    showFirstLastButtons
+    [length]="length"
+    [pageSize]="10"
+    aria-label="Select page"
+    (page)="onPageChange($event)"
+  >
+  </mat-paginator>
+</div>

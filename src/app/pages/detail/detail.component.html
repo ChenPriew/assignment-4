@@ -1,0 +1,110 @@
+<div class="container">
+  <!-- BackButton -->
+  <div class="mt-5">
+    <div style="width: 7%; cursor: pointer">
+      <a
+        routerLink="/"
+        class="text-yellow d-flex text-start align-items-center fs-4 fw-bold text-decoration-none text-warning"
+        ><mat-icon aria-hidden="false" fontIcon="arrow_back_ios"></mat-icon
+        >Back</a
+      >
+    </div>
+  </div>
+  <!-- Card -->
+  <div
+    style="background-color: rgb(33, 33, 33)"
+    class="w-100 mt-2 p-2"
+    *ngFor="let item of movieID"
+  >
+    <div class="d-flex justify-content-between align-items-center">
+      <div>
+        <div>
+          <h2 class="text-white">{{ item.Title }}</h2>
+        </div>
+        <div class="d-flex text-secondary fs-6">
+          <li style="list-style: none">{{ item.Year }}</li>
+          <li class="ms-4">{{ item.Rated }}</li>
+          <li class="ms-4">{{ item.Runtime }}</li>
+        </div>
+      </div>
+      <div class="d-flex flex-row">
+        <div
+          class="d-flex flex-column justify-content-between ms-2 fs-6"
+          *ngFor="let rating of item.Ratings"
+        >
+          <span class="text-secondary text-center">{{ rating.Source }}</span>
+          <button mat-button>
+            <mat-icon fontIcon="star" class="text-warning"></mat-icon>
+            {{ rating.Value }}
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="mt-2">
+      <div class="row">
+        <div class="col-4">
+          <img class="ms-n2 w-100" src="{{ item.Poster }}" alt="" />
+        </div>
+        <div class="col-8">
+          <div class="mb-2">
+            <button mat-stroked-button style="border-radius: 9999px">
+              {{ item.Genre }}
+            </button>
+          </div>
+          <p class="text-white">{{ item.Plot }}</p>
+          <hr class="my-2 text-secondary" />
+          <div>
+            <span class="text-white mr-4">Director</span>
+            <span class="text-primary ms-2">{{ item.Director }}</span>
+          </div>
+          <hr class="my-2 text-secondary" />
+          <div>
+            <span class="text-white mr-4">Writers</span>
+            <span class="text-primary ms-2">{{ item.Writer }}</span>
+          </div>
+          <hr class="my-2 text-secondary" />
+          <div>
+            <span class="text-white mr-4">Actors</span>
+            <span class="text-primary ms-2">{{ item.Actors }}</span>
+          </div>
+          <hr class="my-2 text-secondary" />
+          <div>
+            <span class="text-white mr-4">Language</span>
+            <span class="text-primary ms-2">{{ item.Language }}</span>
+          </div>
+          <hr class="my-2 text-secondary" />
+          <div>
+            <span class="text-white mr-4">Country</span>
+            <span class="text-primary ms-2">{{ item.Country }}</span>
+          </div>
+          <hr class="my-2 text-secondary" />
+          <div>
+            <span class="text-white mr-4">Awards</span>
+            <span class="text-primary ms-2">{{ item.Awards }}</span>
+          </div>
+          <hr class="my-2 text-secondary" />
+          <div>
+            <span class="text-white mr-4">Released</span>
+            <span class="text-primary ms-2">{{ item.Released }}</span>
+          </div>
+          <hr class="my-2 text-secondary" />
+          <div>
+            <span class="text-white mr-4">Type</span>
+            <span class="text-primary ms-2">{{ item.Type }}</span>
+          </div>
+          <hr class="my-2 text-secondary" />
+          <div>
+            <span class="text-white mr-4">DVD</span>
+            <span class="text-primary ms-2">{{ item.DVD }}</span>
+          </div>
+          <hr class="my-2 text-secondary" />
+          <div>
+            <span class="text-white mr-4">BoxOffice</span>
+            <span class="text-primary ms-2">{{ item.BoxOffice }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br />
+</div>
